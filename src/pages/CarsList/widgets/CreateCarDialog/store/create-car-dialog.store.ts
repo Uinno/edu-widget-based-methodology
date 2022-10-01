@@ -1,6 +1,6 @@
 import {createSlice, isAnyOf, PayloadAction} from "@reduxjs/toolkit";
 import {createCar, setCreateCarDialogClose, setCreateCarDialogOpen} from "./create-car-dialog.thunks";
-import {Car} from "../../CarsList/store/cars-list.store";
+import {Car} from "../../CarList/store/car-list.store";
 import {
     confirmCloseCreateCarDialog
 } from "../../CreateCarConfirmationDialog/store/create-car-confirmation-dialog.thunks";
@@ -22,7 +22,7 @@ const initialState = (): CreateCarDialogStore => ({
 })
 
 export const createCarDialogSlice = createSlice({
-    name: 'create-car-dialog',
+    name: 'createCarDialog',
     initialState: initialState(),
     reducers: {
         setFormData(state, action: PayloadAction<Partial<Omit<Car, 'id'>>>) {
@@ -33,7 +33,7 @@ export const createCarDialogSlice = createSlice({
         }
     },
     extraReducers: (builder) => {
-        builder.addCase(createCar.pending, (state, action) => {
+        builder.addCase(createCar.pending, (state) => {
             state.loading = true
         })
         /**
@@ -61,7 +61,7 @@ export const createCarDialogSlice = createSlice({
                 createCar.fulfilled,
                 confirmCloseCreateCarDialog.fulfilled
             ),
-            (state, action) => {
+            () => {
                 return initialState()
             })
 

@@ -1,5 +1,5 @@
 import {createSlice, EntityId, isAnyOf, PayloadAction} from "@reduxjs/toolkit";
-import {Car} from "../../../CarsList/widgets/CarsList/store/cars-list.store";
+import {Car} from "../../../CarsList/widgets/CarList/store/car-list.store";
 import {deleteCar, editCar, setEditCarDialogClose, setEditCarDialogOpenById} from "./edit-car-dialog.thunks";
 import {confirmCloseEditCarDialog} from "../../EditCarConfirmationDialog/store/edit-car-confirmation-dialog.thunks";
 import {isObjectEmpty} from "../../../../utils/isObjectEmpty";
@@ -24,7 +24,7 @@ const initialState = (): EditCarDialogStore => ({
 })
 
 export const editCarDialogSlice = createSlice({
-    name: 'edit-car-dialog',
+    name: 'editCarDialog',
     initialState: initialState(),
     reducers: {
         setFormData(state, action: PayloadAction<Partial<Omit<Car, 'id'>>>) {

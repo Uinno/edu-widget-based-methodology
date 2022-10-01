@@ -1,9 +1,6 @@
 import {useParams} from "react-router-dom";
 import {Paper, Skeleton, Table, TableBody, TableCell, TableContainer, TableRow, Typography} from "@mui/material";
 import {useAppDispatch, useAppSelector} from "../../../../store/hooks";
-import {selectCarById} from "../../../CarsList/widgets/CarsList/store/cars-list.selectors";
-import {EntityId} from "@reduxjs/toolkit";
-import {RootState} from "../../../../store/store";
 import {useEffect} from "react";
 import {fetchCarById} from "./store/car-details.thunks";
 import {selectCarDetails, selectCarDetailsLoading} from "./store/car-details.selectors";

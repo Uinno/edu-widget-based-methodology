@@ -12,8 +12,9 @@ import {
 import Button from "@mui/material/Button";
 import {EditCarConfirmationDialogWidget} from "../EditCarConfirmationDialog/edit-car-confirmation-dialog.widget";
 import {EditCarDialogWidgetProps, useEditCarDialogWidgetState} from "./state/edit-car-dialog.state";
+import {memo} from "react";
 
-export const EditCarDialogWidget = (props: EditCarDialogWidgetProps) => {
+export const EditCarDialogWidget = memo((props: EditCarDialogWidgetProps) => {
     const {
         initialState,
         open,
@@ -76,6 +77,7 @@ export const EditCarDialogWidget = (props: EditCarDialogWidgetProps) => {
                             />
                         </FormGroup>
                     </form>}
+                    <EditCarConfirmationDialogWidget/>
                 </DialogContent>
                 <DialogActions>
                     <Button color="error" onClick={onDeleteHandler} disabled={loading}>
@@ -86,7 +88,6 @@ export const EditCarDialogWidget = (props: EditCarDialogWidgetProps) => {
                     </Button>
                 </DialogActions>
             </Dialog>
-            <EditCarConfirmationDialogWidget/>
         </>
     )
-}
+}, (prevProps, nextProps) => prevProps.id === nextProps.id);

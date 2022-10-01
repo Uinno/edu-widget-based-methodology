@@ -6,11 +6,11 @@ import {
 } from "./edit-car-dialog.selectors";
 import {RootState} from "../../../../store/store";
 import {areObjectsEqual} from "../../../../utils/areObjectsEqual";
-import {Car} from "../../../CarsList/widgets/CarsList/store/cars-list.store";
+import {Car} from "../../../CarsList/widgets/CarList/store/car-list.store";
 import {openEditCarConfirmationDialog} from "../../EditCarConfirmationDialog/store/edit-car-confirmation-dialog.store";
 
 export const editCar = createAsyncThunk(
-    'cars/editCar',
+    `editCarDialog/editCar`,
     async (arg: Car, thunkAPI) => {
         const {id, ...changes} = arg
         const response = await fetch(`http://localhost:3000/cars/${id}`, {
@@ -37,7 +37,7 @@ export const editCar = createAsyncThunk(
         condition: (arg, api) => {
             const initialState = selectEditCarDialogInitialState(api.getState() as RootState);
             const {id, ...changes} = arg;
-            if(initialState === null) return false;
+            if (initialState === null) return false;
             return !areObjectsEqual(initialState, changes);
         },
         dispatchConditionRejection: true
@@ -45,7 +45,7 @@ export const editCar = createAsyncThunk(
 )
 
 export const deleteCar = createAsyncThunk(
-    'cars/deleteCar',
+    `editCarDialog/deleteCar`,
     async (arg: { id: number }, thunkAPI) => {
         const {id} = arg;
         const response = await fetch(`http://localhost:3000/cars/${id}`, {
@@ -68,7 +68,7 @@ export const deleteCar = createAsyncThunk(
  * of fetching the more actual data from the server
  */
 export const setEditCarDialogOpenById = createAsyncThunk(
-    'edit-car-dialog/open',
+    `editCarDialog/open`,
     async (arg: { id: number }, thunkAPI) => {
         const {id} = arg;
         const response = await fetch(`http://localhost:3000/cars/${id}`)
@@ -92,7 +92,7 @@ const isFormContainUnsavedData = (state: RootState) => {
 
 
 export const setEditCarDialogClose = createAsyncThunk(
-    'edit-car-dialog/close',
+    `editCarDialog/close`,
     async (arg, thunkAPI) => {
 
         /**

@@ -1,5 +1,5 @@
 import {configureStore} from '@reduxjs/toolkit'
-import {carsListSlice} from "../pages/CarsList/widgets/CarsList/store/cars-list.store";
+import {carListSlice} from "../pages/CarsList/widgets/CarList/store/car-list.store";
 import {createCarDialogSlice} from "../pages/CarsList/widgets/CreateCarDialog/store/create-car-dialog.store";
 import {editCarDialogSlice} from "../pages/widgets/EditCarDialog/store/edit-car-dialog.store";
 import {
@@ -12,12 +12,12 @@ import {carDetailsSlice} from "../pages/CarDetails/widgets/CarDetails/store/car-
 
 export const store = configureStore({
     reducer: {
-        cars: carsListSlice.reducer,
-        createCarDialog: createCarDialogSlice.reducer,
-        editCarDialog: editCarDialogSlice.reducer,
-        editCarConfirmationDialog: editCarConfirmationDialogSlice.reducer,
-        createCarConfirmationDialog: createCarConfirmationDialogSlice.reducer,
-        carDetails: carDetailsSlice.reducer
+        [carListSlice.name]: carListSlice.reducer,
+        [createCarDialogSlice.name]: createCarDialogSlice.reducer,
+        [editCarDialogSlice.name]: editCarDialogSlice.reducer,
+        [editCarConfirmationDialogSlice.name]: editCarConfirmationDialogSlice.reducer,
+        [createCarConfirmationDialogSlice.name]: createCarConfirmationDialogSlice.reducer,
+        [carDetailsSlice.name]: carDetailsSlice.reducer
     },
 })
 

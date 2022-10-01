@@ -1,8 +1,8 @@
 import {createAsyncThunk} from "@reduxjs/toolkit";
-import {Car} from "./cars-list.store";
+import {Car} from "./car-list.store";
 
 export const fetchCars = createAsyncThunk<Car[]>(
-    'cars-list/fetchCars',
+    `carList/fetchCars`,
     async (arg, thunkAPI) => {
         const response = await fetch('http://localhost:3000/cars');
 

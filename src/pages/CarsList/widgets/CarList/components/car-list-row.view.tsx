@@ -1,10 +1,9 @@
 import {useAppSelector} from "../../../../../store/hooks";
-import {RootState} from "../../../../../store/store";
 import {memo, useMemo} from "react";
 import {Grid, TableCell, TableRow} from "@mui/material";
 import {ShowEditCarDialogButtonWidget} from "../../ShowEditCarDialogButton/show-edit-car-dialog-button.widget";
 import {EntityId} from "@reduxjs/toolkit";
-import {selectCarById} from "../store/cars-list.selectors";
+import {selectCarByIdSelector} from "../store/car-list.selectors";
 import {Link} from "react-router-dom";
 import Button from "@mui/material/Button";
 
@@ -12,12 +11,7 @@ type Props = {
     id: EntityId
 }
 
-/**
- * This function has been moved outside of component in terms of memoization.
- * But we can place it inside the component.
- * @param id
- */
-const selectCarByIdSelector = (id: EntityId) => (state: RootState) => selectCarById(state, id);
+
 
 const useCarListRowView = ({id}: Props) => {
     /**
@@ -44,7 +38,6 @@ export const CarListRowView = memo((props: Props) => {
 
     return (
         <TableRow
-            key={car.id}
             sx={{'&:last-child td, &:last-child th': {border: 0}}}
         >
             <TableCell>{car.id}</TableCell>

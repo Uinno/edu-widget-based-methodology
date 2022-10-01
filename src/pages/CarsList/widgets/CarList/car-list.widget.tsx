@@ -3,8 +3,8 @@ import {useAppDispatch, useAppSelector} from "../../../../store/hooks";
 import {useEffect} from "react";
 import {CarListRowView} from "./components/car-list-row.view";
 import {CarListHeaderView} from "./components/car-list-header.view";
-import {selectCarsAllIds} from "./store/cars-list.selectors";
-import {fetchCars} from "./store/cars-list.thunks";
+import {selectCarsAllIds} from "./store/car-list.selectors";
+import {fetchCars} from "./store/car-list.thunks";
 
 const useCarsListWidgetState = () => {
     const ids = useAppSelector(selectCarsAllIds);
@@ -16,7 +16,7 @@ const useCarsListWidgetState = () => {
     return {ids} as const;
 }
 
-export const CarsListWidget = () => {
+export const CarListWidget = () => {
     const {ids} = useCarsListWidgetState();
 
     return (

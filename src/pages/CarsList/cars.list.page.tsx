@@ -2,7 +2,7 @@ import {Container, Grid, Paper, Typography} from "@mui/material";
 import {
     ShowCreateCarDialogButtonWidget
 } from "./widgets/ShowCreateCarDialogButton/show-create-car-dialog-button.widget";
-import {CarsListWidget} from "./widgets/CarsList/cars-list.widget";
+import {CarListWidget} from "./widgets/CarList/car-list.widget";
 
 export const CarsListPage = () => {
 
@@ -20,7 +20,7 @@ export const CarsListPage = () => {
                     </Paper>
                 </Grid>
                 <Grid item xs={12}>
-                    <CarsListWidget/>
+                    <CarListWidget/>
                 </Grid>
             </Grid>
         </Container>

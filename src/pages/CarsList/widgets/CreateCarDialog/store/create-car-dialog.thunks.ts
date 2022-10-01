@@ -1,5 +1,5 @@
 import {createAsyncThunk} from "@reduxjs/toolkit";
-import {Car} from "../../CarsList/store/cars-list.store";
+import {Car} from "../../CarList/store/car-list.store";
 import {RootState} from "../../../../../store/store";
 import {selectCreateCarDialogFormData, selectCreateCarDialogIsLoading} from "./create-car-dialog.selectors";
 import {
@@ -8,9 +8,9 @@ import {
 import {areObjectValuesFalsy} from "../../../../../utils/areObjectValuesFalsy";
 
 export const createCar = createAsyncThunk(
-    'cars/createCar',
+    `createCarDialog/createCar`,
     async (arg: Omit<Car, 'id'>, thunkAPI) => {
-        const response = await fetch('http://localhost:3000/cars1', {
+        const response = await fetch('http://localhost:3000/cars', {
             method: 'POST',
             body: JSON.stringify(arg),
             headers: {
@@ -29,13 +29,13 @@ export const createCar = createAsyncThunk(
 const isFormContainUnsavedData = (state: RootState) => {
     const formData = selectCreateCarDialogFormData(state);
 
-    if(formData === null) return false;
+    if (formData === null) return false;
 
     return !areObjectValuesFalsy(formData);
 }
 
 export const setCreateCarDialogClose = createAsyncThunk(
-    'create-car-dialog/close',
+    `createCarDialog/close`,
     async (arg, thunkAPI) => {
 
         /**
@@ -59,6 +59,6 @@ export const setCreateCarDialogClose = createAsyncThunk(
 )
 
 export const setCreateCarDialogOpen = createAsyncThunk(
-    'create-car-dialog/open',
+    `createCarDialog/open`,
     async () => true
 )

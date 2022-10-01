@@ -6,11 +6,11 @@ type EditCarConfirmationDialogStore = {
 }
 
 const getInitialState = (): EditCarConfirmationDialogStore => ({
-    isConfirmationDialogOpen: false
+    isConfirmationDialogOpen: false,
 })
 
 export const editCarConfirmationDialogSlice = createSlice({
-    name: 'edit-car-confirmation-dialog',
+    name: 'editCarConfirmationDialog',
     initialState: getInitialState(),
     reducers: {
         setConfirmationDialogOpen(state) {

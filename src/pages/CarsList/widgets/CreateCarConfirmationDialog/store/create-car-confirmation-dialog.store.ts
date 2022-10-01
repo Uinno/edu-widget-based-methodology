@@ -10,7 +10,7 @@ const getInitialState = (): CreateCarConfirmationDialogStore => ({
 })
 
 export const createCarConfirmationDialogSlice = createSlice({
-    name: 'create-car-confirmation-dialog',
+    name: 'createCarConfirmationDialog',
     initialState: getInitialState(),
     reducers: {
         setConfirmationDialogOpen(state) {
