@@ -93,7 +93,7 @@ export const useEditCarDialogWidgetState = ({id}: EditCarDialogWidgetProps) => {
     const onSnackbarCloseHandler = () => dispatch(editCarDialogNetworkErrorCleared());
     const networkError = useAppSelector(selectEditCarDialogNetworkError);
 
-    const onSubmitHandler = handleSubmit((data, event) => {
+    const onSubmitHandler = handleSubmit((data) => {
         dispatch(editCar({...data, id}));
     })
 

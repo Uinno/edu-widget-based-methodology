@@ -4,7 +4,7 @@ import {CreateCarConfirmationDialogWidget} from "../CreateCarConfirmationDialog/
 import {CreateCarDialogWidgetProps, useCreateCarDialogWidgetState} from "./state/create-car-dialog.state";
 
 
-export const CreateCarDialogWidget = (props: CreateCarDialogWidgetProps) => {
+export const CreateCarDialogWidget = () => {
     const {
         open,
         onCloseHandler,
@@ -13,7 +13,7 @@ export const CreateCarDialogWidget = (props: CreateCarDialogWidgetProps) => {
         errors,
         networkError,
         onSnackbarCloseHandler
-    } = useCreateCarDialogWidgetState(props);
+    } = useCreateCarDialogWidgetState();
 
     return (
         <>

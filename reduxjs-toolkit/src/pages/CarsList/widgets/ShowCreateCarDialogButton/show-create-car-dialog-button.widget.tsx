@@ -6,7 +6,7 @@ import {setCreateCarDialogOpen} from "../CreateCarDialog/store/create-car-dialog
 type Props = {
 }
 
-const useShowCreateCarDialogButtonWidgetState = (props: Props) => {
+const useShowCreateCarDialogButtonWidgetState = () => {
     const dispatch = useAppDispatch();
     const setOpen = () => dispatch(setCreateCarDialogOpen());
 
@@ -14,7 +14,7 @@ const useShowCreateCarDialogButtonWidgetState = (props: Props) => {
 }
 
 export const ShowCreateCarDialogButtonWidget = (props: Props) => {
-    const {onCreateClickHandler} = useShowCreateCarDialogButtonWidgetState(props);
+    const {onCreateClickHandler} = useShowCreateCarDialogButtonWidgetState();
 
     return (
         <>

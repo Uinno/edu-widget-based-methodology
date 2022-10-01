@@ -70,7 +70,7 @@ const useFormToStoreSubscription = (watch: UseFormWatch<CreateCarDialogForm>) =>
  * but here we've done it to provide the better readability.
  *
  */
-export const useCreateCarDialogWidgetState = (props: CreateCarDialogWidgetProps) => {
+export const useCreateCarDialogWidgetState = () => {
     const dispatch = useAppDispatch();
 
     const {register, handleSubmit, formState: {errors}, reset, watch} = useForm<CreateCarDialogForm>({
@@ -88,7 +88,7 @@ export const useCreateCarDialogWidgetState = (props: CreateCarDialogWidgetProps)
 
     const networkError = useAppSelector(selectCreateCarDialogNetworkError);
 
-    const onSubmitHandler = handleSubmit((data, event) => {
+    const onSubmitHandler = handleSubmit((data) => {
         dispatch(createCar(data));
     })
 
