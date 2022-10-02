@@ -1,7 +1,7 @@
 import {createSlice} from "@reduxjs/toolkit";
 import {fetchCarById} from "./car-details.thunks";
 
-type CarDetails = {
+export type CarDetails = {
     id: number,
     brand: string,
     model: string,

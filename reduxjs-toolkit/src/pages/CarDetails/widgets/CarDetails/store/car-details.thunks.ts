@@ -1,6 +1,5 @@
 import {createAsyncThunk, EntityId} from "@reduxjs/toolkit";
-import {Car} from "../../../../CarsList/widgets/CarList/store/car-list.store";
-import {carDetailsSlice} from "./car-details.store";
+import {CarDetails, carDetailsSlice} from "./car-details.store";
 
 export const fetchCarById = createAsyncThunk(
     `${carDetailsSlice.name}/fetchCar`,
@@ -12,7 +11,7 @@ export const fetchCarById = createAsyncThunk(
             return thunkAPI.rejectWithValue(response.statusText)
         }
 
-        return (await response.json()) as Car;
+        return (await response.json()) as CarDetails;
     }
 )
 
