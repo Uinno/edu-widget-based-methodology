@@ -1,0 +1,28 @@
+{
+  "cars": [
+    {
+      "year": 2009,
+      "model": "Meriva A",
+      "brand": "Opel",
+      "id": 31
+    },
+    {
+      "year": 2022,
+      "model": "Rifter",
+      "brand": "Peugeot",
+      "id": 32
+    },
+    {
+      "year": 2021,
+      "model": "Berlingo",
+      "brand": "Citroen",
+      "id": 33
+    },
+    {
+      "year": 2019,
+      "model": "CX-3",
+      "brand": "Mazda",
+      "id": 34
+    }
+  ]
+}
