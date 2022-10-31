@@ -1,0 +1,40 @@
+{
+  "cars": [
+    {
+      "year": 2020,
+      "model": "CX-3",
+      "brand": "Mazda",
+      "id": 30
+    },
+    {
+      "year": 2021,
+      "model": "Berlingo",
+      "brand": "Citroens",
+      "id": 33
+    },
+    {
+      "year": 2017,
+      "model": "VIDA",
+      "brand": "ZAZ",
+      "id": 35
+    },
+    {
+      "year": 112112,
+      "model": "!!!!!sss",
+      "brand": "Test",
+      "id": 44
+    },
+    {
+      "year": 123232,
+      "model": "Car",
+      "brand": "Placeholder",
+      "id": 47
+    },
+    {
+      "year": 123,
+      "model": "new model",
+      "brand": "New car",
+      "id": 48
+    }
+  ]
+}
