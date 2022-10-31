@@ -2,9 +2,12 @@ import * as yup from "yup";
 import {useForm, UseFormReset, UseFormWatch} from "react-hook-form";
 import {useEffect} from "react";
 import {useAppDispatch, useAppSelector} from "../../../../store/hooks";
-import {editCarDialogNetworkErrorCleared, setEditCarDialogFormData} from "../store/edit-car-dialog.store";
 import {
-    selectEditCarDialogFormData,
+    editCarDialogNetworkErrorCleared,
+    setEditCarDialogFormIsDirty
+} from "../store/edit-car-dialog.store";
+import {
+    selectEditCarDialogFormIsDirty,
     selectEditCarDialogInitialState,
     selectEditCarDialogIsOpenById,
     selectEditCarDialogLoading,
@@ -37,7 +40,7 @@ const schema = yup.object({
  * @param reset
  */
 const useResetFormState = (reset: UseFormReset<EditCarDialogForm>) => {
-    const formData = useAppSelector(selectEditCarDialogFormData);
+    const formData = useAppSelector(selectEditCarDialogFormIsDirty);
     useEffect(() => {
         if (formData === null) {
             reset()
@@ -54,16 +57,14 @@ const useResetFormState = (reset: UseFormReset<EditCarDialogForm>) => {
  * Subscribe the form changes and sync them with Store.
  * It's needed to check the unsaved changes in the form
  * and show the confirmation dialog
- * @param watch
+ * @param isDirty
  */
-const useFormToStoreSubscription = (watch: UseFormWatch<EditCarDialogForm>) => {
+const useFormToStoreSubscription = (isDirty: boolean) => {
     const dispatch = useAppDispatch();
 
     useEffect(() => {
-        watch((data) => {
-            dispatch(setEditCarDialogFormData(data));
-        })
-    }, [])
+        dispatch(setEditCarDialogFormIsDirty(isDirty));
+    }, [isDirty])
 }
 
 
@@ -77,24 +78,24 @@ export const useEditCarDialogWidgetState = ({id}: EditCarDialogWidgetProps) => {
     const dispatch = useAppDispatch();
 
     const initialState = useAppSelector(selectEditCarDialogInitialState);
-    const {register, handleSubmit, formState: {errors}, reset, watch} = useForm<EditCarDialogForm>({
+    const {register, handleSubmit, formState: {errors, isDirty}, reset, watch} = useForm<EditCarDialogForm>({
         defaultValues: {...initialState},
         resolver: yupResolver(schema)
     });
 
-    useResetFormState(reset);
-    useFormToStoreSubscription(watch);
+    // useResetFormState(reset);
+    useFormToStoreSubscription(isDirty);
 
     const loading = useAppSelector(selectEditCarDialogLoading);
     const open = useAppSelector(selectEditCarDialogIsOpenById(id));
 
-    const onCloseHandler = () => dispatch(setEditCarDialogClose())
-    const onDeleteHandler = () => dispatch(deleteCar({id}));
+    const onCloseHandler = () => dispatch(setEditCarDialogClose()).then(() => reset())
+    const onDeleteHandler = () => dispatch(deleteCar({id})).then(() => reset());
     const onSnackbarCloseHandler = () => dispatch(editCarDialogNetworkErrorCleared());
     const networkError = useAppSelector(selectEditCarDialogNetworkError);
 
     const onSubmitHandler = handleSubmit((data) => {
-        dispatch(editCar({...data, id}));
+        dispatch(editCar({...data, id})).then(() => reset());
     })
 
     return {

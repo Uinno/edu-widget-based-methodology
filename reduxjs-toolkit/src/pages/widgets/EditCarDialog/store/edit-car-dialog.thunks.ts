@@ -1,6 +1,6 @@
 import {createAsyncThunk} from "@reduxjs/toolkit";
 import {
-    selectEditCarDialogFormData,
+    selectEditCarDialogFormIsDirty,
     selectEditCarDialogInitialState,
     selectEditCarDialogLoading
 } from "./edit-car-dialog.selectors";
@@ -83,11 +83,7 @@ export const setEditCarDialogOpenById = createAsyncThunk(
 
 
 const isFormContainUnsavedData = (state: RootState) => {
-    const car = selectEditCarDialogInitialState(state);
-    const formData = selectEditCarDialogFormData(state);
-    if (car === null || formData === null) return false;
-
-    return !areObjectsEqual(car, formData);
+    return selectEditCarDialogFormIsDirty(state);
 }
 
 

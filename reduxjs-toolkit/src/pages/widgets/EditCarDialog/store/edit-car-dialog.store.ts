@@ -2,15 +2,13 @@ import {createSlice, EntityId, isAnyOf, PayloadAction} from "@reduxjs/toolkit";
 import {Car} from "../../../CarsList/widgets/CarList/store/car-list.store";
 import {deleteCar, editCar, setEditCarDialogClose, setEditCarDialogOpenById} from "./edit-car-dialog.thunks";
 import {confirmCloseEditCarDialog} from "../../EditCarConfirmationDialog/store/edit-car-confirmation-dialog.thunks";
-import {isObjectEmpty} from "../../../../utils/isObjectEmpty";
-
 
 type EditCarDialogStore = {
     loading: boolean,
     open: boolean,
     entityId: EntityId | null,
     initialState: Omit<Car, 'id'> | null,
-    formData: Partial<Omit<Car, 'id'>> | null,
+    isDirty: boolean,
     error: string,
 };
 
@@ -18,7 +16,7 @@ const initialState = (): EditCarDialogStore => ({
     loading: false,
     open: false,
     initialState: null,
-    formData: null,
+    isDirty: false,
     entityId: null,
     error: '',
 })
@@ -27,8 +25,8 @@ export const editCarDialogSlice = createSlice({
     name: 'editCarDialog',
     initialState: initialState(),
     reducers: {
-        setFormData(state, action: PayloadAction<Partial<Omit<Car, 'id'>>>) {
-            state.formData = isObjectEmpty(action.payload) ? null : action.payload;
+        setFormIsDirty(state, action: PayloadAction<boolean>) {
+            state.isDirty = action.payload;
         },
         networkErrorCleared(state) {
             state.error = '';
@@ -82,7 +80,7 @@ export const editCarDialogSlice = createSlice({
 })
 
 export const {
-    setFormData: setEditCarDialogFormData,
+    setFormIsDirty: setEditCarDialogFormIsDirty,
     networkErrorCleared: editCarDialogNetworkErrorCleared
 } = editCarDialogSlice.actions;
 

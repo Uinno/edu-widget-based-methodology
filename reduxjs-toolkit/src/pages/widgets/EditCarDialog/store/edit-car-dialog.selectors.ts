@@ -24,8 +24,8 @@ export const selectEditCarDialogNetworkError = createSelector(
     state => state.error
 )
 
-export const selectEditCarDialogFormData = createSelector(
+export const selectEditCarDialogFormIsDirty = createSelector(
     domain,
-    state => state.formData
+    state => state.isDirty
 )
 
