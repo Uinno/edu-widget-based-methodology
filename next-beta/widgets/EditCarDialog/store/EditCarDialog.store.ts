@@ -10,12 +10,12 @@ export type EditCar = {
 }
 
 export const editCarDialogId = atom<string | number | null>({
-    key: "EditCarDialogId",
-    default: null
+    key: "EditCarDialog/Id",
+    default: null,
 })
 
 export const editCarDialogIsOpen = selectorFamily<boolean, string>({
-    key: 'EditCarDialogIsOpen',
+    key: 'EditCarDialog/IsOpen',
     get: id => ({get}) => {
         const dialogId = get(editCarDialogId);
 
@@ -29,21 +29,29 @@ export const editCarDialogInitialState = selector<EditCar>({
         const id = get(editCarDialogId);
         if (id === null) return;
         const result = await fetch(`http://localhost:3001/cars/${id}`);
-        return result.json();
+        // TODO: investigate throw in prod
+        if(!result.ok) return Promise.reject(result.statusText);
+
+        return result.json()
     }
 })
 
 export const editCarConfirmationDialogState = atom({
-    key: 'EditCarConfirmationDialogState',
+    key: 'EditCarConfirmationDialog/State',
     default: false,
 })
 
 export const editCarDialogIsProcessing = atom({
-    key: 'EditCarDialogIsProcessing',
+    key: 'EditCarDialog/IsProcessing',
     default: false,
 })
 
 export const editCarDialogIsDirty = atom({
-    key: 'EditCarDialogIsDirty',
+    key: 'EditCarDialog/IsDirty',
     default: false,
+})
+
+export const editCarDialogErrorState = atom<string | null>({
+    key: 'EditCarDialog/Error',
+    default: null,
 })

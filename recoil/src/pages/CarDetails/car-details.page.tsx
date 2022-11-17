@@ -7,7 +7,8 @@ import {
 } from "../CarsList/widgets/ShowEditCarDialogButton/show-edit-car-dialog-button.widget";
 
 export const CarDetailsPage = () => {
-    const {carId} = useParams<{ carId: string }>()
+    const {carId} = useParams<{ carId: string }>();
+    
     return (
         <Container maxWidth="md">
             <Grid container spacing={2}>

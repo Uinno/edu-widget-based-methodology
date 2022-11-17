@@ -1,6 +1,6 @@
 'use client'
 
-import {useRecoilValue, useSetRecoilState} from "recoil";
+import {useRecoilCallback, useRecoilValue} from "recoil";
 import {
     editCarConfirmationDialogState,
     editCarDialogId,
@@ -8,21 +8,34 @@ import {
     editCarDialogIsOpen
 } from "../store/EditCarDialog.store";
 
+/**
+ * We definitely can split this hook into three
+ * but here I see the common boundary of UI events and properties
+ * @param id
+ */
 export const useEditCarDialogUI = ({id}:{id: string}) => {
-    const setEditingCarId = useSetRecoilState(editCarDialogId);
     const isEditCarDialogOpen = useRecoilValue(editCarDialogIsOpen(id))
-    const isEditCarDialogDirty = useRecoilValue(editCarDialogIsDirty);
-    const setConfirmationDialogState = useSetRecoilState(editCarConfirmationDialogState);
 
-    const onCloseHandler = () => {
-        if (isEditCarDialogDirty) {
-            return setConfirmationDialogState(true);
+    /**
+     * We can use `useRecoilCallback` instead of receiving values from hooks above
+     * In the example below it probably doesn't matter but in the case of some
+     * async actions `useRecoilCallback` will be the best way.
+     */
+    const openEditCarDialog = useRecoilCallback(({set}) => () => {
+        set(editCarDialogId, id)
+    },[id])
+
+    const closeEditCarDialog = useRecoilCallback(({reset,set, snapshot}) => () => {
+        const isEditCarDialogDirty = snapshot.getLoadable(editCarDialogIsDirty).getValue()
+        if(isEditCarDialogDirty){
+            set(editCarConfirmationDialogState, true)
         }
-        setEditingCarId(null)
-    }
+        reset(editCarDialogId);
+    },[])
 
     return {
-        onCloseHandler,
+        openEditCarDialog,
+        closeEditCarDialog,
         isEditCarDialogOpen
     }
 }

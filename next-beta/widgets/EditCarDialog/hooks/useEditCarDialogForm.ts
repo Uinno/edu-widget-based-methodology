@@ -11,7 +11,7 @@ import {useEffect} from "react";
 const schema = yup.object({
     brand: yup.string().required().min(1),
     model: yup.string().required().min(1),
-    year: yup.number().required().min(4)
+    year: yup.number().required().min(1970).max(2022)
 });
 
 

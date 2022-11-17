@@ -4,35 +4,45 @@
 import {UseFormHandleSubmit} from "react-hook-form/dist/types/form";
 import {EditCarDialogForm} from "../types/EditCarDialog.types";
 import {useRouter} from "next/navigation";
-import {useRecoilCallback, useRecoilState, useSetRecoilState} from "recoil";
-import {editCarDialogId, editCarDialogInitialState, editCarDialogIsProcessing} from "../store/EditCarDialog.store";
+import {useRecoilCallback} from "recoil";
+import {
+    editCarDialogErrorState,
+    editCarDialogId,
+    editCarDialogInitialState,
+    editCarDialogIsDirty,
+    editCarDialogIsProcessing
+} from "../store/EditCarDialog.store";
 
-export const useEditCarMutation = (handleSubmit: UseFormHandleSubmit<EditCarDialogForm>, isDirty: boolean) => {
+export const useEditCarMutation = (handleSubmit: UseFormHandleSubmit<EditCarDialogForm>) => {
     const router = useRouter();
-    const [carId, setCarId] = useRecoilState(editCarDialogId);
-    const setEditCarDialogIsProcessing = useSetRecoilState(editCarDialogIsProcessing);
 
-    return useRecoilCallback(({refresh}) => handleSubmit(async (data) => {
+    return useRecoilCallback(({refresh, set, snapshot}) => handleSubmit(async (data) => {
+        const isDirty = await snapshot.getPromise(editCarDialogIsDirty);
         if (!isDirty) {
-            setCarId(null)
+            set(editCarDialogId, null);
         }
         try {
-            setEditCarDialogIsProcessing(true)
-            await fetch(`http://localhost:3001/cars/${carId}`, {
+            const carId  = await snapshot.getPromise(editCarDialogId);
+            set(editCarDialogIsProcessing, true);
+            const result = await fetch(`http://localhost:3001/cars1/${carId}`, {
                 method: 'PUT',
                 body: JSON.stringify(data),
                 headers: {
                     'Content-Type': 'application/json'
                 }
             })
+            if(!result.ok) {
+                set(editCarDialogErrorState, result.statusText);
+                return;
+            }
             router.refresh();
             refresh(editCarDialogInitialState);
-            setCarId(null);
+            set(editCarDialogId, null);
 
         } catch (e) {
             console.error(e)
         } finally {
-            setEditCarDialogIsProcessing(false)
+            set(editCarDialogIsProcessing, false)
         }
-    }))
+    }), [])
 }

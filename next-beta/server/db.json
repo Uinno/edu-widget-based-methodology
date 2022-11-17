@@ -1,21 +1,15 @@
 {
   "cars": [
     {
-      "year": 2020,
-      "model": "CX-3",
+      "year": 2014,
+      "model": "CX-5",
       "brand": "Mazda",
-      "id": 30
+      "id": 32
     },
     {
-      "year": 2008,
-      "model": "Meriva A",
+      "year": 2009,
+      "model": "Meriva",
       "brand": "Opel",
-      "id": 31
-    },
-    {
-      "year": 2019,
-      "model": "Berlingo",
-      "brand": "Citroen",
       "id": 33
     }
   ]

@@ -7,7 +7,6 @@ async function getData(): Promise<CarListItem[]> {
     return res.json();
 }
 
-
 export const CarList = async () => {
     const carList = await getData();
 

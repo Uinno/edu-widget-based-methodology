@@ -1,31 +1,33 @@
 'use client'
 
 import {useRouter} from "next/navigation";
-import {useRecoilState, useSetRecoilState} from "recoil";
-import {editCarDialogId, editCarDialogIsProcessing} from "../store/EditCarDialog.store";
+import {useRecoilCallback} from "recoil";
+import {editCarDialogErrorState, editCarDialogId, editCarDialogIsProcessing} from "../store/EditCarDialog.store";
 
 export const useDeleteCarMutation = () => {
     const router = useRouter();
-    const [carId, setCarId] = useRecoilState(editCarDialogId);
-    const setEditCarDialogIsProcessing = useSetRecoilState(editCarDialogIsProcessing);
 
-    return async () => {
+    return useRecoilCallback(({set, reset, snapshot}) => async () => {
         try {
-            setEditCarDialogIsProcessing(true)
-            const response = await fetch(`http://localhost:3001/cars1/${carId}`, {
+            const carId = await snapshot.getPromise(editCarDialogId)
+            set(editCarDialogIsProcessing, true)
+            const response = await fetch(`http://localhost:3001/cars/${carId}`, {
                 method: 'DELETE',
                 headers: {
                     'Content-Type': 'application/json'
                 }
             })
-            if(!response.ok) return;
+            if(!response.ok) {
+                set(editCarDialogErrorState, response.statusText);
+                return;
+            }
             router.refresh();
-            setCarId(null)
+            reset(editCarDialogId)
 
         } catch (e) {
             throw e
         } finally {
-            setEditCarDialogIsProcessing(false)
+            set(editCarDialogIsProcessing, false)
         }
-    }
+    }, [])
 }
