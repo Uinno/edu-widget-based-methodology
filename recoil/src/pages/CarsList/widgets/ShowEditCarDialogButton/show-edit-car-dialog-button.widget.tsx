@@ -2,16 +2,16 @@ import Button from "@mui/material/Button";
 import {EditCarDialogWidget} from "../../../widgets/EditCarDialog/edit-car-dialog.widget";
 import {SxProps, Theme} from "@mui/material";
 import {useSetRecoilState} from "recoil";
-import {editCarDialogOpenAtom} from "../../../widgets/EditCarDialog/store/edit-car-dialog.store";
 import {memo} from "react";
+import {editCarDialogId} from "../../../widgets/EditCarDialog/store/edit-car-dialog.store";
 
 type Props = {
-    id: number,
+    id: string,
     sx?: SxProps<Theme>
 }
 
 const useShowEditCarDialogButtonWidget = ({id, sx}: Props) => {
-    const setEditCarDialogOpenById = useSetRecoilState(editCarDialogOpenAtom)
+    const setEditCarDialogOpenById = useSetRecoilState(editCarDialogId)
     const setOpen = () => setEditCarDialogOpenById(id);
 
     return {setOpen, id, sx};

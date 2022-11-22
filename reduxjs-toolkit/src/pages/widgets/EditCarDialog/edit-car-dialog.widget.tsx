@@ -12,9 +12,7 @@ import {
 import Button from "@mui/material/Button";
 import {EditCarConfirmationDialogWidget} from "../EditCarConfirmationDialog/edit-car-confirmation-dialog.widget";
 import {EditCarDialogWidgetProps, useEditCarDialogWidgetState} from "./state/edit-car-dialog.state";
-import {memo, Suspense} from "react";
-import {EditCarFormWidget} from "../../../../../recoil/src/pages/widgets/EditCarForm/edit-car-form.widget";
-import {EditCarDialogFormPlaceholder} from "../../../../../recoil/src/pages/widgets/EditCarDialog/components/edit-car-dialog-form-placeholder";
+import {memo} from "react";
 
 export const EditCarDialogWidget = memo((props: EditCarDialogWidgetProps) => {
     const {

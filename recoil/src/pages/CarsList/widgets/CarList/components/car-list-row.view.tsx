@@ -39,7 +39,7 @@ export const CarListRowView = memo((props: Props) => {
             <TableCell>{car.year}</TableCell>
             <TableCell>
                 <Grid container direction="row" justifyContent="space-between" maxWidth="150px">
-                    <ShowEditCarDialogButtonWidget id={car.id}/>
+                    <ShowEditCarDialogButtonWidget id={car.id.toString()}/>
                     <Link to={`/${car.id}`}><Button>View</Button></Link>
                 </Grid>
             </TableCell>

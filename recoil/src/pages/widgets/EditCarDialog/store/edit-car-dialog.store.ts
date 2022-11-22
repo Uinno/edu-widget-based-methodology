@@ -1,46 +1,55 @@
-import {atom, atomFamily, selectorFamily} from "recoil";
-import {carListQuery} from "../../../CarsList/widgets/CarList/store/car-list.store";
-import {syncEffect} from "recoil-sync";
+import {atom, selector, selectorFamily} from "recoil";
 
 export type EditCar = {
     id: number,
     brand: string,
     model: string,
     year: number
-};
+}
 
-export const editCarDialogIsLoadingAtom = atom({
-    key: 'EditCarDialogIsLoading',
-    default: false,
-})
-
-export const editCarDialogOpenAtom = atom<string | number | null>({
-    key: 'EditCarDialogOpen',
+export const editCarDialogId = atom<string | number | null>({
+    key: "EditCarDialog/Id",
     default: null,
 })
 
-export const editCarDialogOpened = selectorFamily<boolean, string | number | undefined>({
-    key: 'EditCarDialogOpened',
-    get: carId => ({get}) => {
-        const editCarDialogId = get(editCarDialogOpenAtom);
-        return editCarDialogId == carId;
+export const editCarDialogIsOpen = selectorFamily<boolean, string>({
+    key: 'EditCarDialog/IsOpen',
+    get: id => ({get}) => {
+        const dialogId = get(editCarDialogId);
+        console.log("DDDDD", dialogId, id)
+        return dialogId !== null && dialogId === id;
     }
 })
 
-export const editCarDialogNetworkErrorAtom = atom({
-    key: 'EditCarDialogAtom',
-    default: ""
+export const editCarDialogInitialState = selector<EditCar>({
+    key: 'EditCarDialog/InitialState',
+    get: async ({get}) => {
+        const id = get(editCarDialogId);
+        if (id === null) return;
+        const result = await fetch(`http://localhost:3000/cars/${id}`);
+        // TODO: investigate throw in prod
+        if(!result.ok) return Promise.reject(result.statusText);
+
+        return result.json()
+    }
 })
 
-export const editCarDialogAction = atom<'idle' | 'save' | 'delete' | 'process'>({
-    key: 'EditCarDialogAction',
-    default: 'idle',
-    effects: [
-        ({onSet, getLoadable, }) => {
-            onSet((newValue, oldValue, isReset) => {
-                const carList = getLoadable(carListQuery);
-                console.log("carList", carList)
-            })
-        },
-    ],
+export const editCarConfirmationDialogState = atom({
+    key: 'EditCarConfirmationDialog/State',
+    default: false,
+})
+
+export const editCarDialogIsProcessing = atom({
+    key: 'EditCarDialog/IsProcessing',
+    default: false,
+})
+
+export const editCarDialogIsDirty = atom({
+    key: 'EditCarDialog/IsDirty',
+    default: false,
+})
+
+export const editCarDialogErrorState = atom<string | null>({
+    key: 'EditCarDialog/Error',
+    default: null,
 })

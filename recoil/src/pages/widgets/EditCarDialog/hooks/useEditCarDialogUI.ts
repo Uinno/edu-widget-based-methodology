@@ -6,7 +6,7 @@ import {
     editCarDialogId,
     editCarDialogIsDirty,
     editCarDialogIsOpen
-} from "../store/EditCarDialog.store";
+} from "../store/edit-car-dialog.store";
 
 /**
  * We definitely can split this hook into three
@@ -33,6 +33,7 @@ export const useEditCarDialogUI = ({id}:{id: string}) => {
         const isEditCarDialogDirty = snapshot.getLoadable(editCarDialogIsDirty).getValue()
         if(isEditCarDialogDirty){
             set(editCarConfirmationDialogState, true)
+            return;
         }
         reset(editCarDialogId);
     },[])
