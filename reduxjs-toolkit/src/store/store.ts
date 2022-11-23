@@ -9,6 +9,7 @@ import {
     createCarConfirmationDialogSlice
 } from "../pages/CarsList/widgets/CreateCarConfirmationDialog/store/create-car-confirmation-dialog.store";
 import {carDetailsSlice} from "../pages/CarDetails/widgets/CarDetails/store/car-details.store";
+import {carListFilterSlice} from "../pages/CarsList/widgets/CarListFilter/store/car-list-filter.store";
 
 export const store = configureStore({
     reducer: {
@@ -17,7 +18,8 @@ export const store = configureStore({
         [editCarDialogSlice.name]: editCarDialogSlice.reducer,
         [editCarConfirmationDialogSlice.name]: editCarConfirmationDialogSlice.reducer,
         [createCarConfirmationDialogSlice.name]: createCarConfirmationDialogSlice.reducer,
-        [carDetailsSlice.name]: carDetailsSlice.reducer
+        [carDetailsSlice.name]: carDetailsSlice.reducer,
+        [carListFilterSlice.name]: carListFilterSlice.reducer
     },
 })
 

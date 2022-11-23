@@ -1,7 +1,7 @@
 import Button from "@mui/material/Button";
-import {EditCarDialogWidget} from "../../../widgets/EditCarDialog/edit-car-dialog.widget";
-import {useAppDispatch} from "../../../../store/hooks";
-import {setEditCarDialogOpenById} from "../../../widgets/EditCarDialog/store/edit-car-dialog.thunks";
+import {EditCarDialogWidget} from "../EditCarDialog/edit-car-dialog.widget";
+import {useAppDispatch} from "../../../store/hooks";
+import {setEditCarDialogOpenById} from "../EditCarDialog/store/edit-car-dialog.thunks";
 import {SxProps, Theme} from "@mui/material";
 
 type Props = {

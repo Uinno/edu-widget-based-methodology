@@ -34,7 +34,7 @@ export const editCarDialogSlice = createSlice({
     },
     extraReducers: (builder) => {
         /**
-         * Set loading to true for the UI/UX representation of loading state
+         * Set loading to true for the UI/UX representation of loading store
          */
         builder.addCase(setEditCarDialogOpenById.pending, (state, action) => {
             state.open = true;
@@ -42,7 +42,7 @@ export const editCarDialogSlice = createSlice({
             state.entityId = action.meta.arg.id
         })
         /**
-         * Set loading to false in case of successful state loading from server/store
+         * Set loading to false in case of successful store loading from server/store
          */
         builder.addCase(setEditCarDialogOpenById.fulfilled, (state, action: PayloadAction<Car>) => {
             state.loading = false;

@@ -28,7 +28,7 @@ const schema = yup.object({
 });
 
 /**
- * Reset form state in case of closing dialog window.
+ * Reset form store in case of closing dialog window.
  * It will be redundant if we use other dialog handling system
  * or unmount this component when dialog closed.
  *
@@ -42,8 +42,8 @@ const useResetFormState = (reset: UseFormReset<CreateCarDialogForm>) => {
         }
         /**
          * Such an approach is needed to run effect only when
-         * initial state changes from null to object and vice versa
-         * instead of running on every initial state reference changes
+         * initial store changes from null to object and vice versa
+         * instead of running on every initial store reference changes
          */
     }, [formData === null]) // [true | false]
 }
@@ -66,7 +66,7 @@ const useFormToStoreSubscription = (watch: UseFormWatch<CreateCarDialogForm>) =>
 
 
 /**
- * It's unnecessary to move the widget state to the separate file
+ * It's unnecessary to move the widget store to the separate file
  * but here we've done it to provide the better readability.
  *
  */

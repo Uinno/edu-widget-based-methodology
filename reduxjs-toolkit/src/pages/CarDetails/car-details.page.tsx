@@ -2,9 +2,7 @@ import {Container, Grid, Paper, Typography} from "@mui/material";
 import {CarDetailsWidget} from "./widgets/CarDetails/car-details.widget";
 import {Link, useParams} from "react-router-dom";
 import Button from "@mui/material/Button";
-import {
-    ShowEditCarDialogButtonWidget
-} from "../CarsList/widgets/ShowEditCarDialogButton/show-edit-car-dialog-button.widget";
+import {ShowEditCarDialogButtonWidget} from "../widgets/ShowEditCarDialogButton/show-edit-car-dialog-button.widget";
 
 export const CarDetailsPage = () => {
     const {carId} = useParams<{ carId: string }>()

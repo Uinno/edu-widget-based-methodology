@@ -1,7 +1,9 @@
 import {useAppSelector} from "../../../../../store/hooks";
 import {memo, useMemo} from "react";
 import {Grid, TableCell, TableRow} from "@mui/material";
-import {ShowEditCarDialogButtonWidget} from "../../ShowEditCarDialogButton/show-edit-car-dialog-button.widget";
+import {
+    ShowEditCarDialogButtonWidget
+} from "../../../../widgets/ShowEditCarDialogButton/show-edit-car-dialog-button.widget";
 import {EntityId} from "@reduxjs/toolkit";
 import {selectCarByIdSelector} from "../store/car-list.selectors";
 import {Link} from "react-router-dom";

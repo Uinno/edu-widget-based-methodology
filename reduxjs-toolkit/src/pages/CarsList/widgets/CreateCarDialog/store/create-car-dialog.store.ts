@@ -53,7 +53,7 @@ export const createCarDialogSlice = createSlice({
             state.loading = false
         })
         /**
-         * Reset widget state in case of successful entity creation or form closing
+         * Reset widget store in case of successful entity creation or form closing
          */
         builder.addMatcher(
             isAnyOf(

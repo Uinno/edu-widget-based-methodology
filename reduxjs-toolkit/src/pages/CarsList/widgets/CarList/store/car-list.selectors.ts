@@ -1,6 +1,7 @@
 import {RootState} from "../../../../../store/store";
 import {createSelector, EntityId} from "@reduxjs/toolkit";
 import {carListAdapter, carListSlice} from "./car-list.store";
+import {selectCarListFilterYearState} from "../../CarListFilter/store/car-list-filter.selectors";
 
 const domain = (state: RootState) => state;
 const carsDomain = createSelector(domain, (state) => state[carListSlice.name]);
@@ -10,8 +11,7 @@ const carListSelectors = carListAdapter.getSelectors<RootState>(
 )
 
 export const {
-    selectById: selectCarById,
-    selectIds: selectCarsAllIds
+    selectAll: selectAllCars
 } = carListSelectors;
 
 /**
@@ -19,3 +19,12 @@ export const {
  * @param id
  */
 export const selectCarByIdSelector = (id: EntityId) => (state: RootState) => carListSelectors.selectById(state, id);
+
+export const selectCarsAllIds = createSelector(
+    selectCarListFilterYearState,
+    (state: RootState) => carListSelectors.selectAll(state),
+    (currentYear, cars) => cars.filter(car => {
+        if(currentYear === 'All') return true;
+        return car.year === Number(currentYear)
+    }).map(car => car.id)
+)
