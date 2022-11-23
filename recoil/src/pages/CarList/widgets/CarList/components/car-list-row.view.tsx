@@ -1,21 +1,15 @@
 import {memo} from "react";
 import {Grid, TableCell, TableRow} from "@mui/material";
-import {ShowEditCarDialogButtonWidget} from "../../ShowEditCarDialogButton/show-edit-car-dialog-button.widget";
-import {EntityId} from "@reduxjs/toolkit";
-import {Link} from "react-router-dom";
+import {
+    ShowEditCarDialogButtonWidget
+} from "../../../../widgets/ShowEditCarDialogButton/show-edit-car-dialog-button.widget";
 import Button from "@mui/material/Button";
+import {Link} from 'react-router-dom';
 import {useRecoilValue} from "recoil";
 import {carSelector} from "../store/car-list.store";
 
 type Props = {
-    id: EntityId
-}
-
-const useCarListRowView = ({id}: Props) => {
-    const car = useRecoilValue(carSelector(id));
-
-    return {car};
-
+    id: string | number
 }
 
 /**
@@ -24,8 +18,8 @@ const useCarListRowView = ({id}: Props) => {
  * such as using the Material UI it could follow to the quite heavy
  * rendering phase
  */
-export const CarListRowView = memo((props: Props) => {
-    const {car} = useCarListRowView(props);
+export const CarListRowView = memo(({id}: Props) => {
+    const car = useRecoilValue(carSelector(id));
 
     if (!car) return null;
 
@@ -40,7 +34,9 @@ export const CarListRowView = memo((props: Props) => {
             <TableCell>
                 <Grid container direction="row" justifyContent="space-between" maxWidth="150px">
                     <ShowEditCarDialogButtonWidget id={car.id.toString()}/>
-                    <Link to={`/${car.id}`}><Button>View</Button></Link>
+                    <Link to={`/${car.id}`}>
+                        <Button>View</Button>
+                    </Link>
                 </Grid>
             </TableCell>
         </TableRow>

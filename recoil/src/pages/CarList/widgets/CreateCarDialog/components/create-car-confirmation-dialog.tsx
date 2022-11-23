@@ -1,29 +1,22 @@
 import {Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle} from "@mui/material";
 import Button from "@mui/material/Button";
-import {
-    useCreateCarConfirmationDialogClose,
-    useCreateCarConfirmationDialogOpenState
-} from "./store/create-car-confirmation-dialog.usecase";
-import {useCreateCarDialogReset} from "../CreateCarDialog/store/create-car-dialog.usecase";
+import {useCreateCarConfirmationDialogUI} from "../hooks/useCreateCarConfirmationDialogUI";
 
 const useCreateCarConfirmationDialogWidgetState = () => {
-    const createCarDialogReset = useCreateCarDialogReset();
-    const createCarConfirmationDialogClose = useCreateCarConfirmationDialogClose();
-    const open = useCreateCarConfirmationDialogOpenState()
-
-    const onConfirmHandler = () => {
-        createCarConfirmationDialogClose();
-        createCarDialogReset()
-    }
+    const {
+        onCreateCarConfirmationDialogConfirmHandler,
+        onCreateCarConfirmationDialogCancelHandler,
+        isCreateCarConfirmationDialogOpen
+    } = useCreateCarConfirmationDialogUI();
 
     return {
-        open,
-        onCloseHandler: createCarConfirmationDialogClose,
-        onConfirmHandler
+        open: isCreateCarConfirmationDialogOpen,
+        onCloseHandler: onCreateCarConfirmationDialogCancelHandler,
+        onConfirmHandler: onCreateCarConfirmationDialogConfirmHandler
     }
 }
 
-export const CreateCarConfirmationDialogWidget = () => {
+export const CreateCarConfirmationDialog = () => {
     const {open, onCloseHandler, onConfirmHandler} = useCreateCarConfirmationDialogWidgetState();
 
     return (

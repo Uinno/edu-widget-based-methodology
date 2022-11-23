@@ -4,17 +4,14 @@ import {createBrowserRouter, RouterProvider} from "react-router-dom";
 import {routes} from "./routes";
 import {RecoilRoot} from "recoil";
 import {RecoilDebugger} from "./utils/recoilDebugger";
-import {RecoilSync} from "recoil-sync";
 
 const router = createBrowserRouter(routes)
 
 ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
     // <React.StrictMode>
     <RecoilRoot>
-        <RecoilSync>
-            <RecoilDebugger/>
-            <RouterProvider router={router}/>
-        </RecoilSync>
+        <RecoilDebugger/>
+        <RouterProvider router={router}/>
     </RecoilRoot>
     // </React.StrictMode>
 )

@@ -1,4 +1,4 @@
-import {atom, selector, selectorFamily} from "recoil";
+import {atom, selector} from "recoil";
 
 export type EditCar = {
     id: number,
@@ -12,12 +12,11 @@ export const editCarDialogId = atom<string | number | null>({
     default: null,
 })
 
-export const editCarDialogIsOpen = selectorFamily<boolean, string>({
+export const editCarDialogIsOpen = selector<boolean>({
     key: 'EditCarDialog/IsOpen',
-    get: id => ({get}) => {
+    get: ({get}) => {
         const dialogId = get(editCarDialogId);
-        console.log("DDDDD", dialogId, id)
-        return dialogId !== null && dialogId === id;
+        return dialogId !== null;
     }
 })
 

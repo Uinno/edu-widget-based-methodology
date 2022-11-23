@@ -8,11 +8,12 @@ import {
     editCarDialogIsProcessing
 } from "../store/edit-car-dialog.store";
 import {EditCarDialogForm} from "./useEditCarDialogForm";
-import {carListQuery} from "../../../CarsList/widgets/CarList/store/car-list.store";
+import {carListQuery} from "../../../CarList/widgets/CarList/store/car-list.store";
+import {carDetailsQuery} from "../../../CarDetails/widgets/CarDetails/store/car-details.store";
 
 export const useEditCarMutation = (handleSubmit: UseFormHandleSubmit<EditCarDialogForm>) => {
 
-    return useRecoilCallback(({refresh, set, snapshot}) => handleSubmit(async (data) => {
+    return useRecoilCallback(({refresh, reset, set, snapshot}) => handleSubmit(async (data) => {
         const isDirty = await snapshot.getPromise(editCarDialogIsDirty);
 
         if (!isDirty) {
@@ -20,7 +21,8 @@ export const useEditCarMutation = (handleSubmit: UseFormHandleSubmit<EditCarDial
         }
 
         try {
-            const carId  = await snapshot.getPromise(editCarDialogId);
+            const carId = await snapshot.getPromise(editCarDialogId);
+            if(!carId) return;
             set(editCarDialogIsProcessing, true);
             const result = await fetch(`http://localhost:3000/cars/${carId}`, {
                 method: 'PUT',
@@ -29,15 +31,14 @@ export const useEditCarMutation = (handleSubmit: UseFormHandleSubmit<EditCarDial
                     'Content-Type': 'application/json'
                 }
             })
-            if(!result.ok) {
+            if (!result.ok) {
                 set(editCarDialogErrorState, result.statusText);
                 return;
             }
             refresh(editCarDialogInitialState);
             refresh(carListQuery);
-            setTimeout(() => {
-                set(editCarDialogId, null);
-            })
+            refresh(carDetailsQuery(carId));
+            reset(editCarDialogId);
 
         } catch (e) {
             console.error(e)

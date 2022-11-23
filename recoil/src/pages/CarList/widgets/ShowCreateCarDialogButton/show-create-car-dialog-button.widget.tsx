@@ -1,10 +1,10 @@
 import Button from "@mui/material/Button";
 import {CreateCarDialogWidget} from "../CreateCarDialog/create-car-dialog.widget";
 import {useSetRecoilState} from "recoil";
-import {createCarDialogOpenAtom} from "../CreateCarDialog/store/create-car-dialog.store";
+import {createCarDialogIsOpen} from "../CreateCarDialog/store/create-car-dialog.store";
 
 const useShowCreateCarDialogButtonWidgetState = () => {
-    const setCreateCarDialogOpen = useSetRecoilState(createCarDialogOpenAtom);
+    const setCreateCarDialogOpen = useSetRecoilState(createCarDialogIsOpen);
     const onCreateClickHandler = () => setCreateCarDialogOpen(true);
 
     return {onCreateClickHandler};

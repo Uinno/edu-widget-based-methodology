@@ -1,4 +1,4 @@
-import {atom, selector, selectorFamily} from "recoil";
+import {selector, selectorFamily} from "recoil";
 
 export type Car = {
     id: number,
@@ -8,20 +8,24 @@ export type Car = {
 };
 
 export const carListQuery = selector({
-    key: 'CarListQuery',
-    get: async({get}) => {
+    key: 'CarList/Query',
+    get: async() => {
         const response = await fetch('http://localhost:3000/cars');
         if(!response.ok){
-            throw new Error('Server error');
+            return Promise.reject(response.statusText);
         }
 
         return (await response.json()) as Car[];
     }
 })
 
-export const carList = atom({
-    key: 'CarList',
-    default: carListQuery
+export const carListIds = selector({
+    key: 'CarList/Ids',
+    get:({get}) => {
+        const cars = get(carListQuery);
+
+        return cars.map(car => car.id);
+    }
 })
 
 export const carSelector = selectorFamily({

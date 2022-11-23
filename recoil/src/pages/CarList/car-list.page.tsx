@@ -1,12 +1,14 @@
-import {Container, Grid, Paper, Skeleton, Typography} from "@mui/material";
+import {Container, Grid, Paper, Typography} from "@mui/material";
 import {
     ShowCreateCarDialogButtonWidget
 } from "./widgets/ShowCreateCarDialogButton/show-create-car-dialog-button.widget";
 import {CarListWidget} from "./widgets/CarList/car-list.widget";
 import {Suspense} from 'react';
-import {CarListPlaceholder} from "./components/CarListPlaceholder";
+import {CarListPlaceholder} from "./components/car-list-placeholder";
+import {EditCarDialogWidget} from "../widgets/EditCarDialog/edit-car-dialog.widget";
+import {CarListErrorBoundary} from "./components/car-list-error-boundary";
 
-export const CarsListPage = () => {
+export const CarListPage = () => {
 
     return (
         <Container maxWidth="md">
@@ -22,11 +24,14 @@ export const CarsListPage = () => {
                     </Paper>
                 </Grid>
                 <Grid item xs={12}>
-                    <Suspense fallback={<CarListPlaceholder/>}>
-                        <CarListWidget/>
-                    </Suspense>
+                    <CarListErrorBoundary>
+                        <Suspense fallback={<CarListPlaceholder/>}>
+                            <CarListWidget/>
+                        </Suspense>
+                    </CarListErrorBoundary>
                 </Grid>
             </Grid>
+            <EditCarDialogWidget/>
         </Container>
     )
 }

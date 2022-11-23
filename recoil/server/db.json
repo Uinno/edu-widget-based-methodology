@@ -2,7 +2,7 @@
   "cars": [
     {
       "year": 2020,
-      "model": "CX-3",
+      "model": "CX-5",
       "brand": "Mazda",
       "id": 30
     },
@@ -13,13 +13,13 @@
       "id": 33
     },
     {
-      "year": 2017,
+      "year": 2018,
       "model": "VIDA",
       "brand": "ZAZ",
       "id": 35
     },
     {
-      "year": 2013,
+      "year": 2014,
       "model": "Model-Y",
       "brand": "Tesla",
       "id": 36

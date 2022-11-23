@@ -8,8 +8,8 @@ import {EditCarConfirmationDialog} from "./components/edit-car-confirmation-dial
 import {EditCarDialogContentErrorBoundary} from "./components/edit-car-dialog-content-error-boundary";
 
 
-export const EditCarDialogWidget = memo(({id}: { id: string }) => {
-    const {isEditCarDialogOpen, closeEditCarDialog} = useEditCarDialogUI({id})
+export const EditCarDialogWidget = memo(() => {
+    const {isEditCarDialogOpen, closeEditCarDialog} = useEditCarDialogUI()
 
     return (
         <>
@@ -25,4 +25,4 @@ export const EditCarDialogWidget = memo(({id}: { id: string }) => {
             </Dialog>
         </>
     )
-}, (prevProps, nextProps) => prevProps.id === nextProps.id);
+}, () => true);
