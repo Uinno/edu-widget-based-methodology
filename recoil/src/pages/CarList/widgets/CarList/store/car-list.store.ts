@@ -1,4 +1,5 @@
 import {selector, selectorFamily} from "recoil";
+import {carListFilterYearsCurrentState} from "../../CarListFilter/store/car-list-filter.store";
 
 export type Car = {
     id: number,
@@ -23,8 +24,15 @@ export const carListIds = selector({
     key: 'CarList/Ids',
     get:({get}) => {
         const cars = get(carListQuery);
+        const yearFilter = get(carListFilterYearsCurrentState);
 
-        return cars.map(car => car.id);
+        return cars
+            .filter(car => {
+                if(yearFilter === 'All') return true;
+
+                return Number(yearFilter) === car.year
+            })
+            .map(car => car.id);
     }
 })
 

@@ -13,16 +13,22 @@
       "id": 33
     },
     {
-      "year": 2018,
-      "model": "VIDA",
-      "brand": "ZAZ",
-      "id": 35
-    },
-    {
-      "year": 2014,
+      "year": 2010,
       "model": "Model-Y",
       "brand": "Tesla",
       "id": 36
+    },
+    {
+      "year": 2010,
+      "model": "Meriva A",
+      "brand": "Opel",
+      "id": 37
+    },
+    {
+      "year": 2018,
+      "model": "Forester",
+      "brand": "Subaru",
+      "id": 38
     }
   ]
 }

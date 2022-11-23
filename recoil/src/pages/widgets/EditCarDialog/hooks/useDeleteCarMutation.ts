@@ -2,9 +2,10 @@
 
 import {useRecoilCallback} from "recoil";
 import {editCarDialogErrorState, editCarDialogId, editCarDialogIsProcessing} from "../store/edit-car-dialog.store";
+import {carListQuery} from "../../../CarList/widgets/CarList/store/car-list.store";
 
 export const useDeleteCarMutation = () => {
-    return useRecoilCallback(({set, reset, snapshot}) => async () => {
+    return useRecoilCallback(({set, reset, refresh, snapshot}) => async () => {
         try {
             const carId = await snapshot.getPromise(editCarDialogId)
             set(editCarDialogIsProcessing, true)
@@ -18,7 +19,8 @@ export const useDeleteCarMutation = () => {
                 set(editCarDialogErrorState, response.statusText);
                 return;
             }
-            reset(editCarDialogId)
+            refresh(carListQuery);
+            reset(editCarDialogId);
 
         } catch (e) {
             throw e

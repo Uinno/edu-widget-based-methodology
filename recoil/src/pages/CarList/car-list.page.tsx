@@ -7,6 +7,7 @@ import {Suspense} from 'react';
 import {CarListPlaceholder} from "./components/car-list-placeholder";
 import {EditCarDialogWidget} from "../widgets/EditCarDialog/edit-car-dialog.widget";
 import {CarListErrorBoundary} from "./components/car-list-error-boundary";
+import {CarListFilterWidget} from "./widgets/CarListFilter/car-list-filter.widget";
 
 export const CarListPage = () => {
 
@@ -23,6 +24,7 @@ export const CarListPage = () => {
                         </Grid>
                     </Paper>
                 </Grid>
+                <CarListFilterWidget/>
                 <Grid item xs={12}>
                     <CarListErrorBoundary>
                         <Suspense fallback={<CarListPlaceholder/>}>
