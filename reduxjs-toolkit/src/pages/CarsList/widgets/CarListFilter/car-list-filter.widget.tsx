@@ -3,6 +3,7 @@ import {Grid, Paper} from "@mui/material";
 import {Suspense} from "react";
 
 export const CarListFilterWidget = () => {
+
     return (
         <Grid item xs={12}>
             <Paper sx={{
