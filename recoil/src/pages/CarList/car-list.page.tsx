@@ -3,11 +3,11 @@ import {
     ShowCreateCarDialogButtonWidget
 } from "./widgets/ShowCreateCarDialogButton/show-create-car-dialog-button.widget";
 import {CarListWidget} from "./widgets/CarList/car-list.widget";
-import {Suspense} from 'react';
-import {CarListPlaceholder} from "./components/car-list-placeholder";
 import {EditCarDialogWidget} from "../widgets/EditCarDialog/edit-car-dialog.widget";
-import {CarListErrorBoundary} from "./components/car-list-error-boundary";
 import {CarListFilterWidget} from "./widgets/CarListFilter/car-list-filter.widget";
+import {CarListErrorBoundary} from "./components/car-list-error-boundary";
+import {CarListPlaceholder} from "./components/car-list-placeholder";
+import {Suspense} from "react";
 
 export const CarListPage = () => {
 

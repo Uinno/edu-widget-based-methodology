@@ -30,7 +30,7 @@ export const editCarDialogInitialState = selector<EditCar>({
         if(!result.ok) return Promise.reject(result.statusText);
 
         return result.json()
-    }
+    },
 })
 
 export const editCarConfirmationDialogState = atom({

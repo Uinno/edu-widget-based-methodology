@@ -1,12 +1,6 @@
 {
   "cars": [
     {
-      "year": 2020,
-      "model": "CX-5",
-      "brand": "Mazda",
-      "id": 30
-    },
-    {
       "year": 2021,
       "model": "Berlingo",
       "brand": "Citroens",
@@ -20,7 +14,7 @@
     },
     {
       "year": 2010,
-      "model": "Meriva A",
+      "model": "Meriva B",
       "brand": "Opel",
       "id": 37
     },
@@ -29,6 +23,12 @@
       "model": "Forester",
       "brand": "Subaru",
       "id": 38
+    },
+    {
+      "year": 2010,
+      "model": "B-class",
+      "brand": "Mercedes",
+      "id": 39
     }
   ]
 }

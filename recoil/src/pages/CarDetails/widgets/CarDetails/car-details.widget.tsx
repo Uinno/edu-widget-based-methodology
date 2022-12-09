@@ -8,11 +8,10 @@ const useCarDetailsHeaderWidgetState = () => {
 
     /**
      * The approach below is the alternative using the Suspense
-     * and here we can more precisely handle the loading process
+     * and here we can handle loading process in the "good old" way.
      */
-    const carDetailsLoadable = useRecoilValueLoadable(carDetailsQuery(carId));
-    const loading = carDetailsLoadable.state === "loading"
-    const carDetails = carDetailsLoadable.contents;
+    const {state, contents: carDetails } = useRecoilValueLoadable(carDetailsQuery(carId));
+    const loading = state === "loading"
 
     return {carDetails, loading}
 }

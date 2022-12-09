@@ -9,7 +9,6 @@ import {
 import {carListQuery} from "../../CarList/store/car-list.store";
 
 export const useCreateCarMutation = (handleSubmit: UseFormHandleSubmit<CreateCarDialogForm>, isDirty: boolean) => {
-
     return useRecoilCallback(({set, refresh}) => handleSubmit(async (data) => {
         if (!isDirty) {
             set(createCarDialogIsOpen,false);
