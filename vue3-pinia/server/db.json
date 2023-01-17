@@ -1,0 +1,28 @@
+{
+  "cars": [
+    {
+      "year": 2014,
+      "model": "CX-5",
+      "brand": "Mazda",
+      "id": 32
+    },
+    {
+      "brand": "Skoda",
+      "model": "Fabia",
+      "year": "2008",
+      "id": 35
+    },
+    {
+      "brand": "Skoda",
+      "model": "Octavia",
+      "year": "2015",
+      "id": 36
+    },
+    {
+      "brand": "Opel",
+      "model": "Meriva",
+      "year": "2008",
+      "id": 38
+    }
+  ]
+}
