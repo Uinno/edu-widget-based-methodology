@@ -1,0 +1,16 @@
+{
+  "cars": [
+    {
+      "year": 2014,
+      "model": "CX-5",
+      "brand": "Mazda",
+      "id": 32
+    },
+    {
+      "year": 2009,
+      "model": "Meriva",
+      "brand": "Opel",
+      "id": 33
+    }
+  ]
+}
